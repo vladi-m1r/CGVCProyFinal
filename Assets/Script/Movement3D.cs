@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement3D : MonoBehaviour
 {
@@ -23,5 +24,21 @@ public class Movement3D : MonoBehaviour
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    void Update()
+    {
+        // Verifica si se ha presionado la tecla Espacio
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Obtiene el índice de la escena actual
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+            // Calcula el índice de la escena a la que se va a cambiar
+            int nextSceneIndex = (currentSceneIndex == 0) ? 1 : 0;
+
+            // Cambia a la siguiente escena
+            SceneManager.LoadScene(nextSceneIndex);
+        }
     }
 }
